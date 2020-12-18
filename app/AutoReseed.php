@@ -955,6 +955,11 @@ class AutoReseed
         if (isset($configALL[$site]['url_join']) && $configALL[$site]['url_join']) {
             $url = $url.(strpos($url, '?') === false ? '?' : '&').implode('&', $configALL[$site]['url_join']);
         }
+        // 海豚音乐：替换authkey和torrent_pass
+        if (strcmp($site, "dicmusic")==0){
+            $url = str_replace('{torrent_pass}', $configALL[$site]['torrent_pass'], $url);
+            $url = str_replace('{authkey}', $configALL[$site]['authkey'], $url);
+        }
         return $url;
     }
 
@@ -1068,7 +1073,9 @@ class AutoReseed
     private static function wechatMessage()
     {
         global $configALL;
-        if (isset($configALL['notify_on_change']) && $configALL['notify_on_change'] && self::$wechatMsg['reseedSuccess'] == 0 && self::$wechatMsg['reseedError'] == 0) {
+        if (isset($configALL['notify_on_change']) && $configALL['notify_on_change'] && self::$wechatMsg['reseedSuccess'] == 0 
+// && self::$wechatMsg['reseedError'] == 0
+) {
             return '';
         }
         $br = PHP_EOL;
