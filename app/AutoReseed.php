@@ -1073,9 +1073,7 @@ class AutoReseed
     private static function wechatMessage()
     {
         global $configALL;
-        if (isset($configALL['notify_on_change']) && $configALL['notify_on_change'] && self::$wechatMsg['reseedSuccess'] == 0 
-// && self::$wechatMsg['reseedError'] == 0
-) {
+        if (isset($configALL['notify_on_change']) && $configALL['notify_on_change'] && self::$wechatMsg['reseedSuccess'] == 0 && self::$wechatMsg['reseedError'] == 0) {
             return '';
         }
         $br = PHP_EOL;
